@@ -8,5 +8,31 @@
 	</head>
 	<body>
 		<h1>Hello world!</h1>
+		<table class="tg">
+			<thead>
+				<tr>
+					<th class>#</th>
+					<th class>Foto</th>
+					<th class>Nombre</th>
+					<th class>Apellido</th>
+					<th class>Horario</th>
+					<th class>Teléfono</th>
+					<th class>Mail</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for alumno in alumnos %}
+				<tr>
+					<td>{{alumno[6]}}</td>
+					<td>{{alumno[0]}}</td>
+					<td>{{alumno[1]}}</td>
+					<td>{{alumno[2]}}</td>
+					<td>{{alumno[5]}}</td>
+					<td>{{alumno[3]}}</td>
+					<td>{{alumno[4]}}</td>
+				</tr>
+				{% endfor%}
+			</tbody>
+		</table>
 	</body>
 </html>

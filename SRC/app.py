@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import render_template
-from flask import request
+from flask import request, redirect
 from flaskext.mysql import MySQL
 
 app = Flask(__name__)
@@ -8,7 +8,7 @@ mysql = MySQL()
 
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'hollywood01!'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'mypass'
 app.config['MYSQL_DATABASE_DB'] = 'alumnos'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 
@@ -16,14 +16,18 @@ mysql.init_app(app)
 
 @app.route('/')
 def index():
-    # conn = mysql.connect()
-    # cursor = conn.cursor()
-    # sql = 'insert into alumnos (nombre, mail, foto) values ("Juan", "juan.gmail@gmail.com", "fotojuan.jpg");'
-    # cursor.execute(sql)
+    conn = mysql.connect()
+    cursor = conn.cursor()
 
-    # conn.commit()
+    sql = "SELECT * FROM alumnos;"
+    cursor.execute(sql)
 
-    return render_template('alumnos/index.html')
+    alumnos = cursor.fetchall()
+
+    conn.commit()
+    print(*alumnos)
+
+    return render_template('alumnos/index.html', alumnos=alumnos)
 
 @app.route('/create')
 def create():
