@@ -15,7 +15,4 @@ CREATE TABLE alumnos (
 insert into alumnos (nombre, apellido, mail, cel, foto) values
 ('Laura', 'Avalle', 'laura.avalle@gmail.com', '1566517318', '1978-11-01 '); 
 
-SELECT 
-    *
-FROM
-    alumnos;
+SELECT * FROM alumnos;

@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import render_template
-from flask.wrappers import Request
+from flask import request
 from flaskext.mysql import MySQL
 
 app = Flask(__name__)
@@ -10,6 +10,7 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'hollywood01!'
 app.config['MYSQL_DATABASE_DB'] = 'alumnos'
+app.config['MYSQL_DATABASE_PORT'] = 3306
 
 mysql.init_app(app)
 
@@ -30,14 +31,15 @@ def create():
 
 @app.route('/store', methods=["POST"])
 def store():
-    _nombre = Request.form['txtNombre']
-    _apellido = Request.form['txtApellido']
-    _mail = Request.form['txtMail']
-    _horarios = Request.form['txtHorarios']
-    _celular = Request.form['txtCelular']
-    _foto = Request.files['txtFoto']
 
-    sql = "INSERT INTO alumnos (nombre, apellido, mail, horarios, cel, foto) values (%s, %s, %s, %s, %s);"
+    _nombre = request.form['txtNombre']
+    _apellido = request.form['txtApellido']
+    _mail = request.form['txtMail']
+    _horarios = request.form['txtHorario']
+    _celular = request.form['txtCel']
+    _foto = request.files['txtFoto']
+
+    sql = "INSERT INTO alumnos (nombre, apellido, mail, horarios, cel, foto) values (%s, %s, %s, %s, %s, %s);"
     datos = (_nombre, _apellido, _mail, _horarios, _celular, _foto.filename)
 
     
