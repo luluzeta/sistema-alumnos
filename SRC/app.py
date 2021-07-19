@@ -62,20 +62,23 @@ def store():
     return redirect('/')
 
 @app.route('/delete/<int:id>')
-def delete(id):
-    sql = f'SELECT FROM alumnos WHERE id={id}'
-    datos = [id]
+def delete(id):    
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    
+    sql = f'SELECT foto FROM alumnos WHERE id={id}'
+    cursor.execute(sql)
+
+    nombreFoto = cursor.fetchone()[0]
 
     try:
-        os.remove(os.path.join(app.config['UPLOADS'], nombreFoto[0]))
+        os.remove(os.path.join(app.config['UPLOADS'], nombreFoto))
     except:
         pass
 
     sql = f'DELETE FROM alumnos WHERE id={id}'
-
-    conn = mysql.connect()
-    cursor = conn.cursor()
     cursor.execute(sql)
+    
     conn.commit()
 
     return redirect('/') 
@@ -101,7 +104,7 @@ def update():
     _foto = request.files['txtFoto']
     id = request.form['txtId']
 
-    datos = (_nombre, _apellido, _mail, _horarios, _celular, id)
+    #datos = (_nombre, _apellido, _mail, _horarios, _celular, id)
 
     conn = mysql.connect()
     cursor = conn.cursor()
