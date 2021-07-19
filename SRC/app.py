@@ -63,7 +63,7 @@ def store():
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    sql = "SELECT foto FROM alumnos WHERE id = (%s);"
+    sql = f'SELECT FROM alumnos WHERE id={id}'
     datos = [id]
 
     try:
@@ -71,7 +71,7 @@ def delete(id):
     except:
         pass
 
-    sql = "DELETE FROM alumnos WHERE id = (%s);"
+    sql = f'DELETE FROM alumnos WHERE id={id}'
 
     conn = mysql.connect()
     cursor = conn.cursor()
