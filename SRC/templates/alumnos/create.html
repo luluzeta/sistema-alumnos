@@ -1,35 +1,58 @@
 {% include 'header.html'%}
-<form method="POST" action="/store" enctype="multipart/form-data">
-	<label for="txtNombre">Nombre:</label>
-	<input type="text" name="txtNombre" id="txtNombre" />
-	<br /><br />
-	<label for="txtApellido">Apellido:</label>
-	<input type="text" name="txtApellido" id="txtApellido" />
-	<br /><br />
-	<label for="txtMail">Mail:</label>
-	<input type="email" name="txtMail" id="txtMail" />
-	<br /><br />
-	<label for="txtHorario">Elije tu horario:</label>
-	<select id="txtHorario" name="txtHorario">
-		<option value="lun 6 a 8">Lunes de 18 a 20hs</option>
-		<option value="ma 9 a 11">Martes de 9 a 11hs</option>
-		<option value="mie 9 a 11">Miércoles de 9 a 11hs</option>
-		<option value="mie 15 a 17">Martes de 15 a 17hs</option>
-		<option value="mie 17 a 19">Martes de 17 a 19hs</option>
-		<option value="mie 19 a 21">Martes de 19 a 21hs</option>
-		<option value="jue 15 a 17">Jueves de 15 a 17hs</option>
-		<option value="jue 17 a 19">Jueves de 17 a 19hs</option>
-		<option value="jue 19 a 21">Jueves de 19 a 21hs</option>
-		<option value="vie 9 a 11">Viernes de 9 a 11hs</option>
-		<option value="vie 11 a 13">Viernes de 11 a 13hs</option>
-	</select>
-	<br /><br />
-	<label for="txtCel">Celular:</label>
-	<input type="text" name="txtCel" id="txtCel" />
-	<br /><br />
-	<label for="txtFoto">Foto de alguna pieza que quieras subir:</label>
-	<input type="file" name="txtFoto" id="txtFoto" />
-	<br /><br />
-	<input type="submit" value="cargar nuevo alumno" />
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+		<div class="alert alert-danger" role="alert">
+			{% for msm in messages %}
+				{{ msg }}
+			{% endfor %}
+		</div>
+	{% endif %}
+{% endwith %}
+
+<form method="POST" action="/alumnos/crear" enctype="multipart/form-data">
+	<div class="card">
+		<div class="card-header">Alta Alumno</div>
+		<div class="card-body">
+			<p class="card-text">
+				<div class="form-group">
+						<label for="txtNombre">Nombre:</label>
+						<input type="text" name="txtNombre" id="txtNombre" />
+				</div>
+				<div class="form-group">
+						<label for="txtApellido">Apellido:</label>
+						<input type="text" name="txtApellido" id="txtApellido" />
+				</div>
+				<div class="form-group">
+						<label for="txtMail">Mail:</label>
+						<input type="email" name="txtMail" id="txtMail" />
+				</div>
+				<div class="form-group">
+						<label for="txtHorario">Elije tu horario:</label>
+						<select id="txtHorario" name="txtHorario">
+							<option value="lun 6 a 8">Lunes de 18 a 20hs</option>
+							<option value="ma 9 a 11">Martes de 9 a 11hs</option>
+							<option value="mie 9 a 11">Miércoles de 9 a 11hs</option>
+							<option value="mie 15 a 17">Martes de 15 a 17hs</option>
+							<option value="mie 17 a 19">Martes de 17 a 19hs</option>
+							<option value="mie 19 a 21">Martes de 19 a 21hs</option>
+							<option value="jue 15 a 17">Jueves de 15 a 17hs</option>
+							<option value="jue 17 a 19">Jueves de 17 a 19hs</option>
+							<option value="jue 19 a 21">Jueves de 19 a 21hs</option>
+							<option value="vie 9 a 11">Viernes de 9 a 11hs</option>
+							<option value="vie 11 a 13">Viernes de 11 a 13hs</option>
+						</select>
+				</div>		
+				<div class="form-group">
+						<label for="txtCel">Celular:</label>
+						<input type="text" name="txtCel" id="txtCel" />
+				</div>
+				<div class="form-group">
+						<label for="txtFoto">Foto de alguna pieza que quieras subir:</label>
+						<input type="file" name="txtFoto" id="txtFoto" />
+				</div>		
+			<input class="btn btn-success" type="submit" value="cargar nuevo alumno" />
+			</p>
+		</div>
+	</div>
 </form>
 {% include 'footer.html'%}

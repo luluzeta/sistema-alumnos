@@ -1,42 +1,60 @@
 {% include 'header.html'%}
 <form method="POST" action="/update" enctype="multipart/form-data">
-	<input hidden type="text" value="{{alumno[0]}}" name="txtId" id="txtId" />
-	<label for="txtNombre">Nombre:</label>
-	<input type="text" name="txtNombre" id="txtNombre" value="{{alumno[1]}}" />
-	<br /><br />
-	<label for="txtApellido">Apellido:</label>
-	<input
-		type="text"
-		name="txtApellido"
-		id="txtApellido"
-		value="{{alumno[2]}}"
-	/>
-	<br /><br />
-	<label for="txtMail">Mail:</label>
-	<input type="email" name="txtMail" id="txtMail" value="{{alumno[3]}}" />
-	<br /><br />
-	<label for="txtHorario">Elije tu horario:</label>
-	<select id="txtHorario" name="txtHorario" value="{{alumno[4]}}">
-		<option value="lun 6 a 8">Lunes de 18 a 20hs</option>
-		<option value="ma 9 a 11">Martes de 9 a 11hs</option>
-		<option value="mie 9 a 11">Miércoles de 9 a 11hs</option>
-		<option value="mie 15 a 17">Martes de 15 a 17hs</option>
-		<option value="mie 17 a 19">Martes de 17 a 19hs</option>
-		<option value="mie 19 a 21">Martes de 19 a 21hs</option>
-		<option value="jue 15 a 17">Jueves de 15 a 17hs</option>
-		<option value="jue 17 a 19">Jueves de 17 a 19hs</option>
-		<option value="jue 19 a 21">Jueves de 19 a 21hs</option>
-		<option value="vie 9 a 11">Viernes de 9 a 11hs</option>
-		<option value="vie 11 a 13">Viernes de 11 a 13hs</option>
-	</select>
-	<br /><br />
-	<label for="txtCel">Celular:</label>
-	<input type="text" name="txtCel" id="txtCel" value="{{alumno[5]}}" />
-	<br /><br />
-	Foto: {{alumno[6]}}
-	<label for="txtFoto">Foto de alguna pieza que quieras subir:</label>
-	<input type="file" name="txtFoto" id="txtFoto" />
-	<br /><br />
-	<input type="submit" value="Modificar alumno" />
+	<div class="card">
+		<div class="card-header">Modificar Alumno</div>
+		<div class="card-body">
+			<p class="card-text">
+				<input hidden type="text" value="{{alumno.id}}" name="txtId" id="txtId" />
+				<div class="form-group">
+					<label for="txtNombre">Nombre:</label>
+					<input type="text" name="txtNombre" id="txtNombre" value="{{alumno.nombre}}" />
+				</div>
+				<div class="form-group">
+					<label for="txtApellido">Apellido:</label>
+					<input
+						type="text"
+						name="txtApellido"
+						id="txtApellido"
+						value="{{alumno.apellido}}"
+					/>
+				</div>
+				<div class="form-group">
+					<label for="txtMail">Mail:</label>
+					<input type="email" name="txtMail" id="txtMail" value="{{alumno.mail}}" />
+				</div>
+				<div class="form-group">
+					<label for="txtHorario">Elije tu horario:</label>
+					<select id="txtHorario" name="txtHorario" value="{{alumno.horarios}}">
+						<option value="lun 6 a 8">Lunes de 18 a 20hs</option>
+						<option value="ma 9 a 11">Martes de 9 a 11hs</option>
+						<option value="mie 9 a 11">Miércoles de 9 a 11hs</option>
+						<option value="mie 15 a 17">Martes de 15 a 17hs</option>
+						<option value="mie 17 a 19">Martes de 17 a 19hs</option>
+						<option value="mie 19 a 21">Martes de 19 a 21hs</option>
+						<option value="jue 15 a 17">Jueves de 15 a 17hs</option>
+						<option value="jue 17 a 19">Jueves de 17 a 19hs</option>
+						<option value="jue 19 a 21">Jueves de 19 a 21hs</option>
+						<option value="vie 9 a 11">Viernes de 9 a 11hs</option>
+						<option value="vie 11 a 13">Viernes de 11 a 13hs</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="txtCel">Celular:</label>
+					<input type="text" name="txtCel" id="txtCel" value="{{alumno.cel}}" />
+				</div>	
+				<div class="form-group">
+					<label for="txtFoto">Foto de perfil:</label>
+					<img class="img-thumbnail" width="100" alt="foto de perfil" src="{{ url_for('uploads', nombreFoto=alumno.foto) }}">
+					<input type="file" name="txtFoto" id="txtFoto" />
+				  </div>
+				<div class="form-group">
+					<input class="btn btn-success" type="submit" value="Modificar alumno" />
+					<a class="btn btn-primary" href="{{url_for('index')}}">Volver</a>
+				</div>
+			</p>
+
+		</div>
+	</div>
+	
 </form>
 {% include 'footer.html'%}
